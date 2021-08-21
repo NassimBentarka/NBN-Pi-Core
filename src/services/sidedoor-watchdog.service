@@ -1,0 +1,12 @@
+[Unit]
+Description=Watchdog service for the SSH reverse tunnel connection daemon
+After=local-fs.target network.target network-online.target
+Wants=sidedoor.service
+
+[Service]
+EnvironmentFile=/etc/sidedoor/sidedoor.conf
+ExecStart=/usr/bin/sidedoor-watchdog ${CONTROLLER_SERVER_USER}@${DOMAIN} ${RPORT} ${CONNCHECK}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
