@@ -1,0 +1,15 @@
+[Unit]
+Description=SSH reverse tunnel connection daemon
+Documentation=man:sidedoor(1)
+After=local-fs.target network.target network-online.target
+Requires=network-online.target
+
+[Service]
+EnvironmentFile=-/etc/sidedoor/sidedoor.conf
+ExecStartPre=/bin/bash -c 'until host ${DOMAIN}; do sleep 1; done'
+ExecStartPre=/usr/bin/sidedoor-zombiekill ${CONTROLLER_SERVER_USER}@${DOMAIN} ${RPORT}
+ExecStart=/usr/bin/sidedoor -R ${RPORT}:localhost:22 ${CONTROLLER_SERVER_USER}@${DOMAIN}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
