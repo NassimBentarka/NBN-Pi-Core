@@ -1,0 +1,35 @@
+#!/bin/bash
+#Usage: sidedoor-watchdog [HOST] [RPORT] [CONNCHECK]
+
+# Watchdog variables
+FAILURES=3 # Number of failures
+HOST=$1
+RPORT=$2
+CONNCHECK=$3
+
+# Definitions:
+FAILCOUNT=$((FAILURES + 1))
+PingTest() {
+  /usr/bin/ping -c 1 $CONNCHECK 1>/dev/null
+  if [ "$?" -ne 0 ]; then
+    let FAILCOUNT=$((FAILCOUNT - 1))
+    echo "PingErrorStatus=${$?}"
+  fi
+}
+
+CheckProcess() {
+  if [[ -z "$(/usr/bin/ssh -F /etc/sidedoor/ssh.conf $HOST 'sudo /usr/bin/lsof -i:"'$RPORT'" -t')" ]]; then
+    echo "Connection loss detected. Restarting sidedoor.service..."
+    systemctl restart sidedoor.service
+  fi
+}
+
+while true; do
+  PingTest
+  CheckProcess
+  if [[ "$FAILCOUNT" -eq 0 ]]; then
+    systemctl restart sidedoor.service
+    FAILCOUNT=$((FAILURES + 1)) # Resets the counter to the original value.
+  fi
+sleep 5
+done

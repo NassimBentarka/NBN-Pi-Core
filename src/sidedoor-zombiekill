@@ -1,0 +1,6 @@
+#!/bin/bash
+#Usage sidedoor-zombiekill [user@ip/domain] [RPORT]
+
+RPORT=$2
+
+/usr/bin/ssh -F /etc/sidedoor/ssh.conf $1 'RPort="'$RPORT'" && ZOMBIE=$(sudo /usr/bin/lsof -i:$RPort -t 2>/dev/null || printf "") && if [[ ! -z "$ZOMBIE" ]]; then sudo kill $ZOMBIE 2>/dev/null && echo "Ackknowelgement from $(whoami)@$(hostname): Killed the zombie SSH session PID = $ZOMBIE for RPort = $RPort" || echo "Ackknowelgement from $(whoami)@$(hostname): kill command failed for PID = $ZOMBIE and RPort = $RPort."; else echo "Ackknowelgement from $(whoami)@$(hostname): No zombie SSH sessions were found for RPort = $RPort."; fi' || :
