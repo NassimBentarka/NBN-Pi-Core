@@ -20,6 +20,7 @@ Practical use cases/ideas:
 
 **Are you using NBN-Pi?**
 Please open an issue!
+
 Bugs reports, feature requests.
 Pull requests are highly welcome.
 
