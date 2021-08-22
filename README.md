@@ -19,7 +19,8 @@ Practical use cases/ideas:
  * Open a layer 0 access backdoor to any network and bypassing firewalls (absolutely not recommended!)
 
 **Are you using NBN-Pi?**
-Bugs reports, feature requests - please open an issue!
+Please open an issue!
+Bugs reports, feature requests.
 Pull requests are highly welcome.
 
 ## Installation
