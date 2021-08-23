@@ -59,5 +59,5 @@ sudo systemctl enable sidedoor.service && sudo systemctl enable sidedoor-watchdo
 
 # Starting services
 echo -e "\033[33mStarting NBN-Pi services...\033[0m"
-sudo systemctl start sidedoor.service && sudo systemctl start sidedoor-watchdog.service
+sudo systemctl restart sidedoor.service && sudo systemctl restart sidedoor-watchdog.service
 echo -e "\033[32mNBN-Pi deployed successfully!\033[0m"
