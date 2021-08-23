@@ -44,7 +44,7 @@ network:
     version: 2
     renderer: NetworkManager
 EOF
-sudo mv 00-network-manager-all.yaml /etc/netplan/
+#sudo mv 00-network-manager-all.yaml /etc/netplan/ ## Plan B if EOF above fails.
 sudo netplan generate && sudo netplan apply
 sudo systemctl restart NetworkManager
 
