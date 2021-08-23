@@ -25,10 +25,10 @@ read_python_vars config.py pi_user server_user controller_ip
 echo -e "\033[33mCopying the local SSH identity to $pi_user@$1...\033[0m"
 ssh-copy-id $pi_user@$1
 echo -e "\033[33mRemotely adding the user '$pi_user' to sudoers...\033[0m"
-ssh -t $pi_user@$1 "sudo echo '%$(whoami)  ALL=(ALL:ALL) NOPASSWD:ALL' | sudo EDITOR='tee -a' visudo"
+ssh -t $pi_user@$1 'SSH_OPTS="-F /dev/null" sudo echo ""'%$pi_user'"  ALL=(ALL:ALL) NOPASSWD:ALL" | sudo EDITOR="tee -a" visudo'
 echo -e "\033[33mRemotely generating an SSH key on $pi_user@$1...\033[0m"
 ssh -t $pi_user@$1 "ssh-keygen -t ed25519 -a 100"
-echo -e "\033[33mRemotely copying the $pi_user@$1 SSH key to $server_user@$controller_ip...\033[0m"
+echo -e "\033[33mRemotely copying the $pi_user@$1 SSH key to ${server_user//[[:blank:]]/}@${controller_ip//[[:blank:]]/}...\033[0m"
 ssh -t $pi_user@$1 'SSH_OPTS="-F /dev/null" ServerUser="'$server_user'" && ControllerIP="'$controller_ip'" && ssh-copy-id ${ServerUser//[[:blank:]]/}@${ControllerIP//[[:blank:]]/}'
 #ssh -t $1@$2 'sudo echo ""'%$(whoami)'"  ALL=(ALL:ALL) NOPASSWD:ALL" | sudo EDITOR='tee -a' visudo'
 echo -e "\033[33mRunning main.py...\033[0m"
