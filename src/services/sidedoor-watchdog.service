@@ -4,7 +4,7 @@ After=local-fs.target network.target network-online.target
 Wants=sidedoor.service
 
 [Service]
-EnvironmentFile=/etc/sidedoor/sidedoor.conf
+EnvironmentFile=-/etc/sidedoor/sidedoor.conf
 ExecStart=/usr/bin/sidedoor-watchdog ${CONTROLLER_SERVER_USER}@${DOMAIN} ${RPORT} ${CONNCHECK}
 Restart=on-failure
 
