@@ -24,13 +24,28 @@ Please open an issue!
 Bugs reports, feature requests.
 Pull requests are highly welcome.
 
-## Installation
+## Getting started
 
-Section coming soon!
+### Prerequisites
+  * SSH Server: acting as a "proxy" SSH server with a static IP or DDNS domain with port 22 accessible from internet.
+  * Bastion host: any linux device/VM - hardware: Raspberry Pi is preferred.
 
-## Configuration
+### Installation
 
-Section coming soon!
+  1. Configure the parameters in config.py
+
+```
+## PARAMETERS -- EDIT BEFORE USE ##
+controller_ip="suncoastsewing.ddns.net"
+server_user="administrator"
+pi_user="ubuntu"
+conn_check="cloudflare.com" # Used by the RPi to periodically check DNS and Internet connectivity. Use any reliable/fast-resolvable domain name.
+hport=22000 # The first port in the series to be used as a seed (hport stands for "host port")
+```
+  2. Run:
+```
+$ ./nbn-pi.sh [raspberry_ip]
+```
 
 ## Recommendations
 
