@@ -6,6 +6,7 @@ from shutil import copyfile
 import os.path
 import inquirer
 from config import *
+import tarfile
 
 # Define generic functions
 def run(cmd):
@@ -39,9 +40,10 @@ def string_replace(filename, source, dest):
         for line in file:
             print(line.replace(source, dest), end='')
 
-def append_to_file(file_name, lines_to_append):
-    # Open the file in append & read mode ('a+')
-    with open(file_name, "a+") as file_object:
+def append_to_file(file_name, lines_to_append, method="w+"):
+    # DEFAULT -- To open the file in truncate/overwrite mode use (method = 'w+')
+    # To open the file in append & read mode use (method = 'a+')
+    with open(file_name, method) as file_object:
         appendEOL = False
         # Move read cursor to the start of file.
         file_object.seek(0)
@@ -65,6 +67,10 @@ def row_index(csv_file):
     reader = csv.reader(file)
     lines = len(list(reader))
     return lines
+
+def make_tarfile(output_filename, source_dir):
+    with tarfile.open(output_filename, "w:gz") as tar:
+        tar.add(source_dir, arcname=os.path.basename(source_dir))
 
 # Define specific functions
 
@@ -92,9 +98,9 @@ def input_inquire(list,message):
 def add_company():
     while True:
         name = input("Enter company name: ")
-        csv_company_append(company_list,name)
+        csv_company_append(clients_list,name)
         print("\n")
-        print(csv_to_list(company_list))
+        print(csv_to_list(clients_list))
         print("\n")
 
 def testing():

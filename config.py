@@ -6,8 +6,7 @@ conn_check="cloudflare.com" # Used by the RPi to periodically check DNS and Inte
 hport=22000 # The first port in the series to be used as a seed (hport stands for "host port")
 
 ## PATHS -- ONLY EDIT IF YOU KNOW WHAT YOU ARE DOING ##
-config_dir="generated-config/" # Target directory to append generated config files
-sidedoor_conf="sidedoor.conf" # Sidedoor config file to be generated
-csv_database= "database/hosts.csv" # Path to the hosts CSV database file
-company_list= "database/clients.csv" # Path to the clients CSV database file
-payload="payload/sidedoor-pack.tar.gz"
+payload="nbn-pi-payload.tar.gz" # Payload file to be generated and transferred to the RPi
+sidedoor_conf="./src/config/sidedoor.conf" # Path to sidedoor config file to be generated
+csv_database= "./hosts.csv" # Path to the hosts CSV database file
+clients_list= "./database/clients.csv" # Path to the clients CSV database file
