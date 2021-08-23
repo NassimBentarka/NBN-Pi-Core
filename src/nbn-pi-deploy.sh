@@ -22,9 +22,9 @@ sudo chmod +x /usr/bin/sidedoor*
 
 # Installing configuration files
 echo -e "\033[33mInstalling configuration files...\033[0m"
-sudo mkdir -p /etc/sidedoor/config/
-sudo mv src/config/sidedoor.conf /etc/sidedoor/config/
-sudo mv src/config/ssh.conf /etc/sidedoor/config/
+sudo mkdir -p /etc/sidedoor/
+sudo mv src/config/sidedoor.conf /etc/sidedoor/
+sudo mv src/config/ssh.conf /etc/sidedoor/
 
 # Installing service files
 echo -e "\033[33mInstalling service files...\033[0m"
