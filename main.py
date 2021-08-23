@@ -45,7 +45,7 @@ def runtime(hport):
     payload_gen(hport) #Main Element #1
     script_push(pi_user, raspberry_ip) #Main Element #2
     csv_append(csv_database, index, hport, client_name)
-    testing()
+    #testing()
 
 if __name__ == '__main__':
     runtime(hport)
