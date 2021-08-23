@@ -104,7 +104,7 @@ def add_company():
         print("\n")
 
 def testing():
-    status=run("ssh " + server_user + "@" + controller_ip + " \"ssh " + pi_user + "@localhost -p " + hport + " \'echo It Works. --Acknowledged by the RPi\'\"")
+    status=run("ssh " + str(server_user) + "@" + str(controller_ip) + " \"ssh " + str(pi_user) + "@localhost -p " + str(hport) + " \'echo It Works. --Acknowledged by the RPi\'\"")
     return status
 
 def post_install(raspberry_ip):

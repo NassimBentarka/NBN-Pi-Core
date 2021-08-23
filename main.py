@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import sys
 from objects import *
 import pyfiglet
 
@@ -10,9 +11,9 @@ def payload_gen(hport):
 
 #Major function #2
 def script_push(pi_user, raspberry_ip):
-    cmd1="scp -rp " + payload + " " + pi_user + "@" + raspberry_ip + ":/home/" + pi_user + "/"
-    cmd2="ssh " + pi_user + "@" + raspberry_ip + " \'" + "sudo tar -xvzf " + payload + " && chmod +x " + "/home/" + pi_user + "/src/nbn-pi-deploy.sh" + "\'"
-    cmd3="ssh " + pi_user + "@" + raspberry_ip + " \"" + "/home/" + pi_user + "/src/nbn-pi-deploy.sh" + "\""
+    cmd1="scp -rp " + str(payload) + " " + str(pi_user) + "@" + str(raspberry_ip) + ":/home/" + str(pi_user) + "/"
+    cmd2="ssh " + str(pi_user) + "@" + str(raspberry_ip) + " \'" + "sudo tar -xvzf " + str(payload) + " && chmod +x " + "/home/" + str(pi_user) + "/src/nbn-pi-deploy.sh" + "\'"
+    cmd3="ssh " + str(pi_user) + "@" + str(raspberry_ip) + " \"" + "/home/" + str(pi_user) + "/src/nbn-pi-deploy.sh" + "\""
     print("Running: ", cmd1)
     run(cmd1)
     print("Running: ", cmd2)
@@ -27,13 +28,14 @@ def runtime(hport):
     index = row_index(csv_database) #Index starts at zero
     print(pyfiglet.figlet_format("NBN-Pi"))
     print("Credits: Nassim Bentarka | GitHub: @NassimBentarka\n\nThis script configures the RPi to be deployed for a given company.\n")
-    raspberry_ip = input("Please enter the Raspberry Pi IP or hostname: ")
+    #raspberry_ip = input("Please enter the Raspberry Pi IP or hostname: ")
+    raspberry_ip = sys.argv[1]
     #company_name = input_inquire(clients_list,"Please choose the company name:") # Optional feature for convinience only. Create the CSV file as mentionned in the variable $clients_list before you uncomment this line.
     client_name = input("Please enter the client/company name: ")
     hport = hport + index
     payload_gen(hport) #Main Element #1
     script_push(pi_user, raspberry_ip) #Main Element #2
-    csv_append(csv_database,id, hport, client_name)
+    csv_append(csv_database, index, hport, client_name)
     testing()
 
 if __name__ == '__main__':

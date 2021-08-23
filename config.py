@@ -1,5 +1,5 @@
 ## PARAMETERS -- EDIT BEFORE USE ##
-controller_ip="example.ddns.net"
+controller_ip="suncoastsewing.ddns.net"
 server_user="administrator"
 pi_user="ubuntu"
 conn_check="cloudflare.com" # Used by the RPi to periodically check DNS and Internet connectivity. Use any reliable/fast-resolvable domain name.
