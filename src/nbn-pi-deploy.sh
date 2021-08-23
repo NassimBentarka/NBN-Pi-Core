@@ -13,10 +13,6 @@ exec 3>&1 4>&2
 trap 'exec 2>&4 1>&3' 0 1 2 3
 exec 1>nbn-pi-deploy.log 2>&1
 
-#Adding $USER to sudoers
-echo -e "\033[33mAdding user '$USER' to sudoers...\033[0m"
-sudo echo '%$(whoami)  ALL=(ALL:ALL) NOPASSWD:ALL' | sudo EDITOR='tee -a' visudo
-
 # Installing executables
 echo -e "\033[33mInstalling executables...\033[0m"
 sudo mv src/sidedoor /usr/bin/

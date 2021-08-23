@@ -4,14 +4,17 @@ from csv import DictWriter
 import fileinput
 from shutil import copyfile
 import os.path
+from sys import stderr
 import inquirer
 from config import *
 import tarfile
 
 # Define generic functions
 def run(cmd):
-    a = subprocess.run([cmd], stdout=subprocess.PIPE, shell=True)
+    a = subprocess.run([cmd], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True,)
     print(a.stdout.decode('utf-8'))
+    print(a.stderr.decode('utf-8'))
+    run.exitcode = a.returncode
 
 def csv_to_list(csv_file):
     with open(csv_file, newline='') as f:

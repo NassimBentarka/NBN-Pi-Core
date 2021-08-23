@@ -12,15 +12,24 @@ def payload_gen(hport):
 #Major function #2
 def script_push(pi_user, raspberry_ip):
     cmd1="scp -rp " + str(payload) + " " + str(pi_user) + "@" + str(raspberry_ip) + ":/home/" + str(pi_user) + "/"
-    cmd2="ssh " + str(pi_user) + "@" + str(raspberry_ip) + " \'" + "sudo tar -xvzf " + str(payload) + " && chmod +x " + "/home/" + str(pi_user) + "/src/nbn-pi-deploy.sh" + "\'"
-    cmd3="ssh " + str(pi_user) + "@" + str(raspberry_ip) + " \"" + "/home/" + str(pi_user) + "/src/nbn-pi-deploy.sh" + "\""
+    cmd2="ssh -t " + str(pi_user) + "@" + str(raspberry_ip) + " \'" + "sudo tar -xvzf " + str(payload) + " && chmod +x " + "/home/" + str(pi_user) + "/src/nbn-pi-deploy.sh" + "\'"
+    cmd3="ssh -t " + str(pi_user) + "@" + str(raspberry_ip) + " \"" + "/home/" + str(pi_user) + "/src/nbn-pi-deploy.sh" + "\""
     print("Running: ", cmd1)
     run(cmd1)
+    if run.exitcode != 0:
+        print("Command failed with exit code", run.exitcode, "\nExiting now!")
+        sys.exit(run.exitcode)
     print("Running: ", cmd2)
     run(cmd2)
+    if run.exitcode != 0:
+        print("Command failed with exit code", run.exitcode, "\nExiting now!")
+        sys.exit(run.exitcode)
     print("Running: ", cmd3)
     run(cmd3)
-    print("Finished running script_push")
+    if run.exitcode != 0:
+        print("Command failed with exit code", run.exitcode, "\nExiting now!")
+        sys.exit(run.exitcode)
+    print("Finished running script_push with suceess!")
 
 def runtime(hport):
     if os.path.exists(csv_database) == False:
