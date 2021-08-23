@@ -29,7 +29,7 @@ ssh -t $pi_user@$1 'SSH_OPTS="-F /dev/null" sudo echo ""'%$pi_user'"  ALL=(ALL:A
 echo -e "\033[33mRemotely generating an SSH key on $pi_user@$1...\033[0m"
 ssh -t $pi_user@$1 "ssh-keygen -t ed25519 -a 100"
 echo -e "\033[33mRemotely copying the $pi_user@$1 SSH key to ${server_user//[[:blank:]]/}@${controller_ip//[[:blank:]]/}...\033[0m"
-ssh -t $pi_user@$1 'SSH_OPTS="-F /dev/null" ServerUser="'$server_user'" && ControllerIP="'$controller_ip'" && ssh-copy-id ${ServerUser//[[:blank:]]/}@${ControllerIP//[[:blank:]]/} && sudo echo ""%${ServerUser//[[:blank:]]/}"  ALL=(ALL:ALL) NOPASSWD:ALL" | sudo EDITOR="tee -a" visudo'
+ssh -t $pi_user@$1 'SSH_OPTS="-F /dev/null" ServerUser="'$server_user'" && ControllerIP="'$controller_ip'" && ssh-copy-id ${ServerUser//[[:blank:]]/}@${ControllerIP//[[:blank:]]/} && ssh -t ${ServerUser//[[:blank:]]/}@${ControllerIP//[[:blank:]]/} "SSH_OPTS="-F /dev/null" sudo echo ""%${ServerUser//[[:blank:]]/}"  ALL=(ALL:ALL) NOPASSWD:ALL" | sudo EDITOR="tee -a" visudo"'
 #ssh -t $1@$2 'sudo echo ""'%$(whoami)'"  ALL=(ALL:ALL) NOPASSWD:ALL" | sudo EDITOR='tee -a' visudo'
 echo -e "\033[33mRunning main.py...\033[0m"
 python3 main.py $1
