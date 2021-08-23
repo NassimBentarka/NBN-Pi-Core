@@ -1,26 +1,30 @@
 # NBN-Pi-Core
-A highly secure Zero-Conf (Plug &amp; Play) solution to remotely manage any LAN using Always On SSH tunnels.
-NBN-Pi maintains an persistent SSH tunnel to a host (Eg: Raspberry Pi) using a set of resilience/failure-proof mechanisms.
+A highly resilient Zero-Conf (Plug & Play) solution to remotely manage any LAN using failproof SSH tunnels.
+NBN-Pi maintains an persistent SSH tunnel to a host (Eg: Raspberry Pi) using a set of resilient/failproof mechanisms.
 
 ![NBN-Pi Tunneling](https://URL/nbn-pi.svg)
 
-The primary use case is maintaining a persistent remote port forward (reverse SSH tunnel) to a proxy SSH server referred here to as controller SSH server. Thus, the local device can be accessed without using incoming connections that may be blocked by a NAT or firewall or otherwise impractical with mobile/cellular networks.
+The primary use case is maintaining a persistent reverse SSH tunnel to a proxy SSH server. Thus, the local device can be accessed without using incoming connections that may be blocked by a NAT or firewall or otherwise impractical with mobile/cellular networks.
 
-SSH clients can connect to the device via the controller SSH proxy server that sidedoor tunnels to. This proxy server must be trusted and secure as it will be a central management server for the reverse tunnels.
+SSH clients can connect to the device via the proxy SSH server that NBN-Pi tunnels to. This proxy server does not have to be trusted as long as it will not have access the SSH identities of hosts.
 
-NBN-Pi enables SSH keepalives and retries SSH with exponential backoff. In order to reconnect as soon as possible, it resets the backoff when a network interface is brought up (or changed) using SIGUSR1.
+NBN-Pi enables SSH keepalives and retries SSH with exponential backoff. In order to reconnect as soon as possible, it resets the backoff when a network interface is brought up (or changed) using SIGUSR1. It also uses a daemon as an external agent to constantly check for loss of internet connection, reconnect, and kills any "zombie" SSH sessions.
 
-Practical use cases/ideas:
+#### Practical use cases/ideas
 
  * Access a web application behind a NAT by remote forwarding the local web server (e.g., port 80). A remote server can host a reverse proxy to the web application and handle SSL/TLS termination and even enforce SSL on the Edge using Cloudflare.
- * Stay connected to office network services behind an SSH [bastion host](https://en.wikipedia.org/wiki/Bastion_host) by local forwarding them.
- * [Melt Evil Corp's tape backups][mrrobot] by remotely controlling a Raspberry Pi (not recommended!).
  * Remotely control a Drone, UAV, RV, or any network over cellular or satellite connectivity in a fully resilient way.
- * Open a layer 0 access backdoor to any network and bypassing firewalls (absolutely not recommended!)
+ * For IT support companies: remotely access clients' networks by plugging a RPi and leaving site without having to deal with time consuming firewalls and router configurations.
+ * Stay connected to office network services behind an SSH [bastion host](https://en.wikipedia.org/wiki/Bastion_host) by local forwarding them.
+
+#### Evil use cases/ideas (not recommended)
+ * [Melt Evil Corp's tape backups][mrrobot] by remotely controlling a Raspberry Pi.
+ * Open a persistent SSH access backdoor to any network and bypass firewalls.
+ * Run on-demand MITM attacks and compromising any network using a Plug&Play Raspberry Pi.
 
 **Are you using NBN-Pi?**
-Please open an issue!
 
+Please open an issue!
 Bugs reports, feature requests.
 Pull requests are highly welcome.
 
