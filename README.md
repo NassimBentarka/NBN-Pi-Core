@@ -2,7 +2,12 @@
 A highly resilient Zero-Conf (Plug & Play) solution to remotely manage any LAN using failproof SSH tunnels.
 NBN-Pi maintains an persistent SSH tunnel to a host (Eg: Raspberry Pi) using a set of resilient/failproof mechanisms.
 
-![NBN-Pi Tunneling](https://URL/nbn-pi.svg)
+![NBN-Pi Tunneling](https://raw.githubusercontent.com/NassimBentarka/NBN-Pi-Core/main/docs/assets/NBN-Pi-Core%20Diagram.svg)
+
+
+
+
+<img src="https://raw.githubusercontent.com/NassimBentarka/NBN-Pi-Core/main/docs/assets/NBN-Pi-Core%20Diagram.svg" width="500">
 
 The primary use case is maintaining a persistent reverse SSH tunnel to a proxy SSH server. Thus, the local device can be accessed without using incoming connections that may be blocked by a NAT or firewall or otherwise impractical with mobile/cellular networks.
 
