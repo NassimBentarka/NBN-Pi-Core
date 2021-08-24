@@ -25,7 +25,7 @@ NBN-Pi enables SSH keepalives and retries SSH with exponential backoff. In order
 ## Getting started
 
 ### Prerequisites
-  * SSH Server: acting as a "proxy" SSH server with a static IP or DDNS domain with port 22 accessible from internet.
+  * SSH Server: acting as a "proxy" SSH server with a static IP or DDNS domain accessible from internet.
   * Bastion host: any linux device/VM - hardware: Raspberry Pi is preferred.
 
 ### Installation
