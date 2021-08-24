@@ -22,12 +22,6 @@ NBN-Pi enables SSH keepalives and retries SSH with exponential backoff. In order
  * Open a persistent SSH access backdoor to any network and bypass firewalls.
  * Run on-demand MITM attacks and compromising any network using a Plug&Play Raspberry Pi.
 
-**Are you using NBN-Pi?**
-
-Please open an issue!
-Bugs reports, feature requests.
-Pull requests are highly welcome.
-
 ## Getting started
 
 ### Prerequisites
@@ -130,6 +124,15 @@ Some differences include:
  * [OpenVPN](https://en.wikipedia.org/wiki/OpenVPN)
  * [PageKite](https://github.com/pagekite/PyPagekite/)
  * [ssh_tunnel](http://sshtunnel.sourceforge.net/)
+
+
+## Contributing
+
+**Are you using NBN-Pi?**
+
+Please open an issue!
+Bugs reports, feature requests.
+Pull requests are highly welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ## License
 
