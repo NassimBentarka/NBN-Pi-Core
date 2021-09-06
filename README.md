@@ -34,7 +34,7 @@ NBN-Pi enables SSH keepalives and retries SSH with exponential backoff. In order
 
 ```
 ## PARAMETERS -- EDIT BEFORE USE ##
-controller_ip="suncoastsewing.ddns.net"
+controller_ip="example.ddns.net"
 server_user="administrator"
 pi_user="ubuntu"
 conn_check="cloudflare.com" # Used by the RPi to periodically check DNS and Internet connectivity. Use any reliable/fast-resolvable domain name.
