@@ -24,19 +24,29 @@ NBN-Pi enables SSH keepalives and retries SSH with exponential backoff. In order
 
 ## Getting started
 
-### Prerequisites
+### Components
   * SSH Server: acting as a "proxy" SSH server with a static IP or DDNS domain accessible from internet.
   * Bastion host: any linux device/VM - hardware: Raspberry Pi is preferred.
 
-### Installation
+### Install dependencies:
+_Make sure Python3 is installed. And for convinience purposes, you may optionally use [Python venv](https://stackoverflow.com/questions/43069780/how-to-create-virtual-env-with-python3/57784374) to isolate the installed deps from your system in a virtual environment._
+#### Run:
+```
+$ git clone https://github.com/NassimBentarka/NBN-Pi-Core.git
+$ cd NBN-Pi-Core
+$ python3 -m venv nbn-pi && source activate
+$ pip install -r requirements.txt
+```
 
-  1. Configure the parameters in config.py
+### How to use:
+
+  1. Configure the parameters in **config.py**:
 
 ```
 ## PARAMETERS -- EDIT BEFORE USE ##
-controller_ip="example.ddns.net"
-server_user="administrator"
-pi_user="ubuntu"
+controller_ip="example.ddns.net" # SSH Proxy Server Domain or IP Address
+server_user="administrator" # SSH Proxy Server user
+pi_user="ubuntu" # Raspberry Pi user
 conn_check="cloudflare.com" # Used by the RPi to periodically check DNS and Internet connectivity. Use any reliable/fast-resolvable domain name.
 hport=22000 # The first port in the series to be used as a seed (hport stands for "host port")
 ```
