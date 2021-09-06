@@ -110,5 +110,5 @@ def testing():
     status=run("ssh " + str(server_user) + "@" + str(controller_ip) + " \"ssh " + str(pi_user) + "@localhost -p " + str(hport) + " \'echo It Works. --Acknowledged by the RPi\'\"")
     return status
 
-def post_install(raspberry_ip): #Obsolete function, replaced in Shell.
+def post_install(raspberry_ip): #Deprecated function
     run("ssh " + pi_user + "@" + raspberry_ip + " \"sudo apt-get update && sudo apt-get -y install network-manager && \"") 
